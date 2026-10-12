@@ -1,0 +1,65 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chatmini AI</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#10131c;color:#f5f7ff;font-family:Arial,sans-serif}
+main{max-width:760px;margin:auto;padding:24px 16px;min-height:100vh;display:flex;flex-direction:column}
+header{text-align:center;padding:22px 0}
+header h1{font-size:36px;margin:0}
+header p{color:#aeb7ce}
+#chat{flex:1;min-height:300px;max-height:60vh;overflow:auto;background:#171c29;border:1px solid #30384b;border-radius:18px;padding:14px}
+.msg{padding:12px 14px;margin:10px 0;border-radius:14px;overflow-wrap:anywhere;white-space:pre-wrap}
+.bot{background:#252d40}
+.user{background:#4056d8;margin-left:12%}
+form{display:flex;gap:8px;margin-top:14px}
+input{flex:1;min-width:0;padding:14px;border-radius:12px;border:1px solid #384158;background:#171c29;color:white;font-size:16px}
+button{padding:12px 17px;border:0;border-radius:12px;background:#6578ff;color:white;font-size:16px}
+#status{text-align:center;color:#aeb7ce;font-size:13px;margin-top:12px}
+</style>
+</head>
+<body>
+<main>
+<header>
+<h1>🤖 Chatmini</h1>
+<p>Your little AI companion</p>
+</header>
+<section id="chat" aria-live="polite">
+<div class="msg bot">Hello! I'm Chatmini. Welcome! My online AI connection is still being set up.</div>
+</section>
+<form id="form">
+<input id="message" placeholder="Message Chatmini..." autocomplete="off" required>
+<button type="submit">Send</button>
+</form>
+<div id="status">Chatmini website · Preview version</div>
+</main>
+<script>
+const form=document.getElementById("form");
+const input=document.getElementById("message");
+const chat=document.getElementById("chat");
+const status=document.getElementById("status");
+
+function addMessage(text,who){
+  const div=document.createElement("div");
+  div.className="msg "+who;
+  div.textContent=text;
+  chat.appendChild(div);
+  chat.scrollTop=chat.scrollHeight;
+}
+
+form.addEventListener("submit",function(e){
+  e.preventDefault();
+  const message=input.value.trim();
+  if(!message)return;
+  addMessage(message,"user");
+  input.value="";
+  addMessage("I'm not connected to my AI server yet. We're still building Chatmini!","bot");
+  status.textContent="Website preview · AI connection pending";
+});
+</script>
+</body>
+</html>
